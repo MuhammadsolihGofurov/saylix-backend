@@ -18,7 +18,7 @@ public class AdminEntity {
     @OneToOne
 //    @MapsId
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private UsersEntity user;
 
     @Column(name = "name")
     private String name;

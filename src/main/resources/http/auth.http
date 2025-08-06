@@ -1,0 +1,11 @@
+### Registeration
+POST http://localhost:9999/api/v1/user/registration
+Content-Type: application/json
+Accept-Language: uz
+
+{
+  "username": "gofurovmuhammadsolih004@gmail.com",
+  "name": "Salome",
+  "password": "secret",
+  "role": "TEACHER"
+}

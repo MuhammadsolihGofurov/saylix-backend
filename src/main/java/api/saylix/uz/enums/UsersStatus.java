@@ -1,5 +1,5 @@
 package api.saylix.uz.enums;
 
-public enum UserStatus {
+public enum UsersStatus {
     BLOCKED, CHECKING, IN_REGISTRATION, ACTIVE
 }

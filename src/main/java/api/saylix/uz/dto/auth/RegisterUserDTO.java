@@ -1,6 +1,6 @@
 package api.saylix.uz.dto.auth;
 
-import api.saylix.uz.enums.UserRoles;
+import api.saylix.uz.enums.UsersRoles;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -13,5 +13,5 @@ public class RegisterUserDTO {
     @NotBlank(message = "Password is required")
     private String password;
     @NotBlank(message = "Role is required")
-    private UserRoles role;
+    private UsersRoles role;
 }

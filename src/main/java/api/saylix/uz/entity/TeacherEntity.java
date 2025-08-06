@@ -1,5 +1,6 @@
 package api.saylix.uz.entity;
 
+import api.saylix.uz.enums.TeacherStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ public class TeacherEntity {
     @OneToOne
 //    @MapsId
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private UsersEntity user;
 
     @Column(name = "name")
     private String name;
@@ -34,6 +35,10 @@ public class TeacherEntity {
 
     @Column(name = "visible")
     private Boolean visible = true;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private TeacherStatus status;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
