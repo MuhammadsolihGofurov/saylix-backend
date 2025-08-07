@@ -35,19 +35,6 @@ public class UsersEntity {
     @Enumerated(EnumType.STRING)
     private UsersStatus status;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @Enumerated(EnumType.STRING)
-//    private List<UsersRoles> roles;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private TeacherEntity teacher;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private StudentEntity student;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private AdminEntity admin;
-
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

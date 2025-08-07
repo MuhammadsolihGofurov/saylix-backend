@@ -1,11 +1,67 @@
-### Registeration
-POST http://localhost:9999/api/v1/user/registration
+### REGISTRATION
+POST http://localhost:9999/api/v1/user/auth/registration
 Content-Type: application/json
 Accept-Language: uz
 
 {
-  "username": "gofurovmuhammadsolih004@gmail.com",
-  "name": "Salome",
+  "username": "222211m@jdu.uz",
+  "name": "Student Muhammadsolih",
   "password": "secret",
-  "role": "TEACHER"
+  "role": "STUDENT"
 }
+
+### REGISTRATION CONFIRM
+POST http://localhost:9999/api/v1/user/auth/registration/confirm
+Content-Type: application/json
+Accept-Language: uz
+
+{
+  "username": "222211m@jdu.uz",
+  "code": "16062"
+}
+
+### RESET PASSWORD
+POST http://localhost:9999/api/v1/user/auth/reset-password
+Content-Type: application/json
+Accept-Language: uz
+
+{
+  "username": "222211m@jdu.uz"
+}
+
+### RESET PASSWORD CONFIRM
+POST http://localhost:9999/api/v1/user/auth/reset-password/confirm
+Content-Type: application/json
+Accept-Language: uz
+
+{
+  "username": "222211m@jdu.uz",
+  "code": "67117",
+  "newPassword": "secret1234"
+}
+
+### LOGIN as STUDENT
+POST http://localhost:9999/api/v1/user/auth/login
+Content-Type: application/json
+Accept-Language: en
+
+{
+  "username": "222211m@jdu.uz",
+  "password": "secret1234"
+}
+
+### LOGIN as TEACHER
+POST http://localhost:9999/api/v1/user/auth/login
+Content-Type: application/json
+Accept-Language: en
+
+{
+  "username": "gofurovmuhammadsolih004@gmail.com",
+  "password": "secret"
+}
+
+### USER GET ME
+GET http://localhost:9999/api/v1/user/me
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyMTFtQGpkdS51eiIsImlkIjoiYjZiNzc0NDQtNzQ2Mi00MjdmLThlMGQtN2M0NjAwZDYyZWI5Iiwicm9sZSI6IlNUVURFTlQiLCJpYXQiOjE3NTQ1OTAwMTEsImV4cCI6MTc1NDY3NjQxMX0.wGNMouDlTb390cx-sTW_AfV8k2iZuqM2fkte6qkoeD0

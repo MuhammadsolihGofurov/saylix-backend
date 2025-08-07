@@ -15,7 +15,7 @@ public interface SendCodeHistoryRepository extends CrudRepository<SendCodeHistor
     Long countByUsernameAndCreatedAtBetween(String username, LocalDateTime start, LocalDateTime end);
 
 
-    Optional<SendCodeHistoryEntity> findTopByUsernameOrderByCreatedAtDesc(String username);
+    Optional<SendCodeHistoryEntity> findTop1ByUsernameOrderByCreatedAtDesc(String username);
 
     @Modifying
     @Transactional

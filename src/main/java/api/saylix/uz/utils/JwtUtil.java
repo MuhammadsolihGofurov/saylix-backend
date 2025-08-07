@@ -16,7 +16,7 @@ public class JwtUtil {
     private static final String secretKey = "fGq1vJxJ8mvV2kjJh78v5K2n6sY9xQzP3gKmRpF3zAs=";
 
     // Token yaratish (faqat bitta rol bilan)
-    public static String encode(String username, Integer id, UsersRoles role) {
+    public static String encode(String username, String id, UsersRoles role) {
         return Jwts
                 .builder()
                 .subject(username)

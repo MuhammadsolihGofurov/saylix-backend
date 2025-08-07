@@ -35,13 +35,23 @@ public class SendCodeService {
 
     private final int smsLimit = 3;
 
-    public void sendRegistrationEmail(String username, AppLanguage language) {
+    public void sendCodeForRegisterUser(String username, AppLanguage language) {
         String code = RandomUtil.getRandomSmsCode();
         String subject = getEmailSubject(language);
-        String body = EmailTemplateUtil.buildRegistrationEmailBody(code, language); // ⬅ reusable
+        String body = EmailTemplateUtil.buildRegistrationEmailBody(code, language);
 
         // save code history
-        saveSendCodeHistory(username, code, subject, TypeOfSendCodeProvider.EMAIL, CodeType.REGISTRATION, language);
+        saveSendCodeHistory(username, subject, code, TypeOfSendCodeProvider.EMAIL, CodeType.REGISTRATION, language);
+        sendCodeToEmail(username, subject, body);
+    }
+
+    public void sendCodeForResetPassword(String username, AppLanguage language) {
+        String code = RandomUtil.getRandomSmsCode();
+        String subject = getEmailSubject(language);
+        String body = EmailTemplateUtil.buildPasswordResetEmailBody(code, language);
+
+        // save code history
+        saveSendCodeHistory(username, subject, code, TypeOfSendCodeProvider.EMAIL, CodeType.RESEND_PASSWORD, language);
         sendCodeToEmail(username, subject, body);
     }
 
@@ -56,10 +66,10 @@ public class SendCodeService {
 
     private String getEmailSubject(AppLanguage language) {
         return switch (language) {
-            case uz -> "Ro‘yxatdan o‘tishni yakunlang";
-            case ru -> "Завершите регистрацию";
-            case en -> "Complete Registration";
-            case jp -> "Complete Registration jp";
+            case uz -> "Tasdiqlash uchun";
+            case ru -> "Подтвердить аккаунт";
+            case en -> "Confirm account";
+            case jp -> "Confirm account jp";
         };
     }
 

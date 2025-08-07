@@ -1,6 +1,5 @@
 package api.saylix.uz.entity;
 
-import api.saylix.uz.enums.TeacherStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,15 +29,14 @@ public class TeacherEntity {
     @Column(name = "bio")
     private String bio;
 
+    @Column(name = "photo_url")
+    private String photoUrl;
+
     @Column(name = "experience_years")
     private Integer experience_years;
 
     @Column(name = "visible")
     private Boolean visible = true;
-
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private TeacherStatus status;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

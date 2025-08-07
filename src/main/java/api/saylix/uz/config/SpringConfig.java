@@ -23,9 +23,12 @@ public class SpringConfig {
     private CustomUserDetailsService customUserDetailsService;
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
 
     public static final String[] AUTH_WHITELIST = {
-            "/api/v1/user/**",
+            "/api/v1/user/auth/**",
             "/api/v1/swagger-ui/**",
     };
 
@@ -40,17 +43,17 @@ public class SpringConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // authorization - Foydalanuvchining tizimdagi huquqlarini tekshirish.
-        // Ya'ni foydalanuvchi murojat qilayotgan API-larni ishlatishga ruxsati bor yoki yo'qligini tekshirishdir.
-        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
-            authorizationManagerRequestMatcherRegistry
-                    .requestMatchers(AUTH_WHITELIST).permitAll()
-                    .anyRequest()
-                    .authenticated();
-        }).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-        http.csrf(AbstractHttpConfigurer::disable); // csrf yoqilgan
-        http.cors(Customizer.withDefaults()); // cors yoqilgan
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults());
+//                .exceptionHandling(ex -> ex
+//                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+//                );
 
         return http.build();
     }

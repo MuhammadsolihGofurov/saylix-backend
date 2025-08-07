@@ -42,7 +42,7 @@ public class SendCodeHistoryService {
     }
 
     public AppResponse<String> check(String username, String code, AppLanguage language) {
-        Optional<SendCodeHistoryEntity> optional = sendCodeHistoryRepository.findTopByUsernameOrderByCreatedAtDesc(username);
+        Optional<SendCodeHistoryEntity> optional = sendCodeHistoryRepository.findTop1ByUsernameOrderByCreatedAtDesc(username);
 
         if (optional.isEmpty()) {
             throw new AppBadException(getLanguage.getMessage("username.wrong", language));
@@ -64,7 +64,7 @@ public class SendCodeHistoryService {
 
 
         LocalDateTime expDate = sms.getCreatedAt().plusMinutes(2);
-        if (!LocalDateTime.now().isAfter(expDate)) {
+        if (LocalDateTime.now().isAfter(expDate)) {
             throw new AppBadException(getLanguage.getMessage("code.expired", language));
         }
 

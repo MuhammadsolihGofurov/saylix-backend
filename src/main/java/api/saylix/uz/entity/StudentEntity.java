@@ -29,6 +29,9 @@ public class StudentEntity {
     @Column(name = "age")
     private Integer age;
 
+    @Column(name = "photo_url")
+    private String photoUrl;
+
     @Column(name = "visible")
     private Boolean visible = true;
 
