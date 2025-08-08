@@ -25,4 +25,9 @@ public interface UsersRepository extends CrudRepository<UsersEntity, String> {
     @Transactional
     @Query("update UsersEntity set password =?2 where id = ?1")
     void updatePassword(String id, String password);
+
+    @Transactional
+    @Query("update UsersEntity u set u.username = :username where u.id = :id")
+    @Modifying
+    void updateUsernameById(String username, String id);
 }

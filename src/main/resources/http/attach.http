@@ -1,0 +1,5 @@
+### USER GET ME
+POST http://localhost:9999/api/v1/attach
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyMTFtQGpkdS51eiIsImlkIjoiYjZiNzc0NDQtNzQ2Mi00MjdmLThlMGQtN2M0NjAwZDYyZWI5Iiwicm9sZSI6IlNUVURFTlQiLCJpYXQiOjE3NTQ1OTAwMTEsImV4cCI6MTc1NDY3NjQxMX0.wGNMouDlTb390cx-sTW_AfV8k2iZuqM2fkte6qkoeD0

@@ -56,12 +56,18 @@ Content-Type: application/json
 Accept-Language: en
 
 {
-  "username": "gofurovmuhammadsolih004@gmail.com",
+  "username": "muhammadsolihdesigner@gmail.com",
   "password": "secret"
 }
 
-### USER GET ME
+### USER GET ME as TEACHER
 GET http://localhost:9999/api/v1/user/me
 Content-Type: application/json
 Accept-Language: en
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyMTFtQGpkdS51eiIsImlkIjoiYjZiNzc0NDQtNzQ2Mi00MjdmLThlMGQtN2M0NjAwZDYyZWI5Iiwicm9sZSI6IlNUVURFTlQiLCJpYXQiOjE3NTQ1OTAwMTEsImV4cCI6MTc1NDY3NjQxMX0.wGNMouDlTb390cx-sTW_AfV8k2iZuqM2fkte6qkoeD0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2Z1cm92bXVoYW1tYWRzb2xpaDAwNEBnbWFpbC5jb20iLCJpZCI6ImIzM2Q5MjdjLTRjY2MtNDc0Yi04ZDY5LTY5YzMyZDRkNWU5MCIsInJvbGUiOiJURUFDSEVSIiwiaWF0IjoxNzU0NjUyMTc3LCJleHAiOjE3NTQ3Mzg1Nzd9.yuFHoPV-BST62jxCyE_-GUGGCn-GGzomSpKUQtKJX6c
+
+### USER GET ME as STUDENT
+GET http://localhost:9999/api/v1/user/me
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyMTFtQGpkdS51eiIsImlkIjoiYjZiNzc0NDQtNzQ2Mi00MjdmLThlMGQtN2M0NjAwZDYyZWI5Iiwicm9sZSI6IlNUVURFTlQiLCJpYXQiOjE3NTQ2NDYwMTksImV4cCI6MTc1NDczMjQxOX0.6a56_0Qw_PazbGp5GSKDtavlTFB-2D_kvgePJotVGew

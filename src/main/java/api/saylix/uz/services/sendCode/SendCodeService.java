@@ -45,6 +45,16 @@ public class SendCodeService {
         sendCodeToEmail(username, subject, body);
     }
 
+    public void sendCodeForUsernameUpdate(String username, AppLanguage language) {
+        String code = RandomUtil.getRandomSmsCode();
+        String subject = getEmailSubject(language);
+        String body = EmailTemplateUtil.buildUpdateUsernameBody(code, language);
+
+        // save code history
+        saveSendCodeHistory(username, subject, code, TypeOfSendCodeProvider.EMAIL, CodeType.UPDATE_USERNAME, language);
+        sendCodeToEmail(username, subject, body);
+    }
+
     public void sendCodeForResetPassword(String username, AppLanguage language) {
         String code = RandomUtil.getRandomSmsCode();
         String subject = getEmailSubject(language);

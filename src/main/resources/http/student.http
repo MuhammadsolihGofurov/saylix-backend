@@ -1,0 +1,22 @@
+### UPDATE DETAILS
+PUT http://localhost:9999/api/v1/student/update/details
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyMTFtQGpkdS51eiIsImlkIjoiYjZiNzc0NDQtNzQ2Mi00MjdmLThlMGQtN2M0NjAwZDYyZWI5Iiwicm9sZSI6IlNUVURFTlQiLCJpYXQiOjE3NTQ2NDYwMTksImV4cCI6MTc1NDczMjQxOX0.6a56_0Qw_PazbGp5GSKDtavlTFB-2D_kvgePJotVGew
+
+{
+  "name": "Solih Student",
+  "surname": "Gofurov",
+  "age": 20
+}
+
+### UPDATE PHOTO
+PUT http://localhost:9999/api/v1/student/update/photo
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMjIyMTFtQGpkdS51eiIsImlkIjoiYjZiNzc0NDQtNzQ2Mi00MjdmLThlMGQtN2M0NjAwZDYyZWI5Iiwicm9sZSI6IlNUVURFTlQiLCJpYXQiOjE3NTQ2NDYwMTksImV4cCI6MTc1NDczMjQxOX0.6a56_0Qw_PazbGp5GSKDtavlTFB-2D_kvgePJotVGew
+
+{
+  "photoKey": "1dhIc78yTammcrPk-J5cY_YTTUhQL-S77",
+  "photoUrl": "https://drive.google.com/uc?id=1dhIc78yTammcrPk-J5cY_YTTUhQL-S77"
+}

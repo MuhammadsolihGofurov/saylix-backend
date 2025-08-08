@@ -32,7 +32,7 @@ public class SpringSecurityUtil {
 
         Object principal = authentication.getPrincipal();
         if (principal instanceof CustomUserDetails userDetails) {
-            return userDetails.getRole() == requiredRole;
+            return userDetails.getRole().equals(requiredRole);
         }
 
         return false;

@@ -5,6 +5,8 @@ import api.saylix.uz.dto.auth.*;
 import api.saylix.uz.dto.response.auth.LoginResponseDTO;
 import api.saylix.uz.dto.response.auth.StudentInfoDTO;
 import api.saylix.uz.dto.response.auth.TeacherInfoDTO;
+import api.saylix.uz.dto.users.UserUpdateUsernameConfirmDTO;
+import api.saylix.uz.dto.users.UserUpdateUsernameDTO;
 import api.saylix.uz.dto.utils.AppResponse;
 import api.saylix.uz.entity.StudentEntity;
 import api.saylix.uz.entity.TeacherEntity;
@@ -233,6 +235,38 @@ public class UsersService {
 
     }
 
+    public AppResponse<String> updateUsername(UserUpdateUsernameDTO dto, AppLanguage language) {
+        Optional<UsersEntity> optional = usersRepository.findByUsernameAndVisibleTrue(dto.getNewUsername());
+
+        if (optional.isPresent()) {
+            throw new AppBadException(getLanguage.getMessage("username.exist", language));
+        }
+
+        if (UsernameCheckingUtil.isEmailValid(dto.getNewUsername())) {
+            sendCodeService.sendCodeForUsernameUpdate(dto.getNewUsername(), language);
+        } else if (UsernameCheckingUtil.isValidPhone(dto.getNewUsername())) {
+            return new AppResponse<>(getLanguage.getMessage("send.code.to.phone", language));
+        }
+
+
+        return new AppResponse<>(getLanguage.getMessage("send.code.for.update", language));
+    }
+
+    public AppResponse<String> updateUsernameConfirm(UserUpdateUsernameConfirmDTO dto, AppLanguage language) {
+        String userId = SpringSecurityUtil.getCurrentUserId();
+
+        // if username is phone, add if statement
+        sendCodeHistoryService.check(dto.getNewUsername(), dto.getCode(), language);
+
+        usersRepository.updateUsernameById(dto.getNewUsername(), userId);
+
+        Optional<UsersEntity> optional = usersRepository.findById(userId);
+        UsersEntity user = optional.get();
+        String newToken = JwtUtil.encode(dto.getNewUsername(), user.getId(), user.getUserRole());
+
+        return new AppResponse<>(newToken, getLanguage.getMessage("user.update.details.success", language));
+    }
+
     //    ADDITIONAL METHODS
     private LoginResponseDTO getLoginResponseDTO(UsersEntity user, AppLanguage language) {
         LoginResponseDTO response = new LoginResponseDTO();
@@ -272,6 +306,8 @@ public class UsersService {
         studentInfo.setSurname(student.getSurname());
         studentInfo.setAge(student.getAge());
         studentInfo.setUserId(student.getUser().getId());
+        studentInfo.setPhotoUrl(student.getPhotoUrl());
+        studentInfo.setPhotoKey(student.getPhotoKey());
         studentInfo.setCreatedAt(student.getCreatedAt());
         studentInfo.setUpdatedAt(student.getUpdatedAt());
         studentInfo.setVisible(student.getVisible());
@@ -284,12 +320,16 @@ public class UsersService {
         teacherInfo.setName(teacher.getName());
         teacherInfo.setSurname(teacher.getSurname());
         teacherInfo.setBio(teacher.getBio());
+        teacherInfo.setExperienceYears(teacher.getExperienceYears());
         teacherInfo.setVisible(teacher.getVisible());
+        teacherInfo.setPhotoUrl(teacher.getPhotoUrl());
+        teacherInfo.setPhotoKey(teacher.getPhotoKey());
         teacherInfo.setCreatedAt(teacher.getCreatedAt());
         teacherInfo.setUpdatedAt(teacher.getUpdatedAt());
         teacherInfo.setUserId(teacher.getUser().getId());
 
         return teacherInfo;
     }
+
 
 }

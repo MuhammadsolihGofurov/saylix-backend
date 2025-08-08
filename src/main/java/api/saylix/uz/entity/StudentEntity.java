@@ -32,6 +32,9 @@ public class StudentEntity {
     @Column(name = "photo_url")
     private String photoUrl;
 
+    @Column(name = "photo_key")
+    private String photoKey;
+
     @Column(name = "visible")
     private Boolean visible = true;
 

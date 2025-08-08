@@ -2,6 +2,8 @@ package api.saylix.uz.controller;
 
 import api.saylix.uz.dto.auth.*;
 import api.saylix.uz.dto.response.auth.LoginResponseDTO;
+import api.saylix.uz.dto.users.UserUpdateUsernameConfirmDTO;
+import api.saylix.uz.dto.users.UserUpdateUsernameDTO;
 import api.saylix.uz.dto.utils.AppResponse;
 import api.saylix.uz.enums.AppLanguage;
 import api.saylix.uz.services.UsersService;
@@ -37,7 +39,6 @@ public class UsersController {
         return ResponseEntity.ok().body(usersService.resetPasswordConfirm(dto, language));
     }
 
-
     @PostMapping("/auth/login")
     public ResponseEntity<AppResponse<LoginResponseDTO>> login(@Valid @RequestBody LoginUserDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
         return ResponseEntity.ok().body(usersService.login(dto, language));
@@ -47,5 +48,16 @@ public class UsersController {
     public ResponseEntity<AppResponse<LoginResponseDTO>> getMe(@RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
         return ResponseEntity.ok().body(usersService.getMe(language));
     }
+
+    @PostMapping("/update/username")
+    public ResponseEntity<AppResponse> updateUsername(@Valid @RequestBody UserUpdateUsernameDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
+        return ResponseEntity.ok().body(usersService.updateUsername(dto, language));
+    }
+
+    @PostMapping("/update/username/confirm")
+    public ResponseEntity<AppResponse> updateUsernameConfirm(@Valid @RequestBody UserUpdateUsernameConfirmDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
+        return ResponseEntity.ok().body(usersService.updateUsernameConfirm(dto, language));
+    }
+
 
 }

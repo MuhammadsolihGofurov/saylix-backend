@@ -32,8 +32,11 @@ public class TeacherEntity {
     @Column(name = "photo_url")
     private String photoUrl;
 
+    @Column(name = "photo_key")
+    private String photoKey;
+
     @Column(name = "experience_years")
-    private Integer experience_years;
+    private Integer experienceYears;
 
     @Column(name = "visible")
     private Boolean visible = true;
