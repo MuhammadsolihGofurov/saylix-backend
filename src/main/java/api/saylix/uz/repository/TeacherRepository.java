@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -25,15 +26,17 @@ public interface TeacherRepository extends CrudRepository<TeacherEntity, String>
             "SET t.name = :name, " +
             "t.surname = :surname, " +
             "t.bio = :bio, " +
-            "t.experienceYears = :experienceYears " +
+            "t.experienceYears = :experienceYears, " +
+            "t.updatedAt = :updatedAt " +
             "WHERE t.user.id = :userId")
-    int updateNameAndSurnameAndBioAndExperienceYearsByUserId(String userId, String name, String surname, String bio, Integer experienceYears);
+    int updateNameAndSurnameAndBioAndExperienceYearsByUserId(String userId, String name, String surname, String bio, Integer experienceYears, LocalDateTime updatedAt);
 
     @Transactional
     @Modifying
     @Query("UPDATE TeacherEntity t " +
             "SET t.photoUrl = :photoUrl, " +
-            "t.photoKey = :photoKey " +
+            "t.photoKey = :photoKey, " +
+            "t.updatedAt = :updatedAt " +
             "WHERE t.id = :id")
-    void updatePhotoKeyAndPhotoUrlById(String photoUrl, String photoKey, String id);
+    void updatePhotoKeyAndPhotoAndUpdateUpdatedAtUrlById(String photoUrl, String photoKey, LocalDateTime updatedAt, String id);
 }

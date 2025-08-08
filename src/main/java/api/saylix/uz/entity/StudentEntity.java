@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -37,6 +39,9 @@ public class StudentEntity {
 
     @Column(name = "visible")
     private Boolean visible = true;
+
+    @ManyToMany(mappedBy = "students")
+    private Set<SubjectEntity> subjects = new HashSet<>();
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

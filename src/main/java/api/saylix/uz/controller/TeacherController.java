@@ -21,7 +21,6 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-
     @PutMapping("/update/details")
     public ResponseEntity<AppResponse<String>> updateDetails(@Valid @RequestBody TeacherUpdateDetails dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
         return ResponseEntity.ok().body(teacherService.updateDetails(dto, language));

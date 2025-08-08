@@ -26,7 +26,7 @@ public class TeacherEntity {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "bio")
+    @Column(name = "bio", columnDefinition = "text")
     private String bio;
 
     @Column(name = "photo_url")

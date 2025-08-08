@@ -24,12 +24,10 @@ import api.saylix.uz.utils.JwtUtil;
 import api.saylix.uz.utils.SpringSecurityUtil;
 import api.saylix.uz.utils.UsernameCheckingUtil;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -265,6 +263,21 @@ public class UsersService {
         String newToken = JwtUtil.encode(dto.getNewUsername(), user.getId(), user.getUserRole());
 
         return new AppResponse<>(newToken, getLanguage.getMessage("user.update.details.success", language));
+    }
+
+    public AppResponse<String> checkUserStatusForTeacher(CheckStatusByUsernameDTO dto , AppLanguage language) {
+        Optional<UsersEntity> optional = usersRepository.findByUsernameAndVisibleTrue(dto.getUsername());
+        if (optional.isEmpty()) {
+            throw new AppBadException(getLanguage.getMessage("username.not.exist", language));
+        }
+
+        UsersEntity user = optional.get();
+
+        if (user.getStatus().equals(UsersStatus.CHECKING)) {
+            throw new AppBadException(getLanguage.getMessage("status.checking.for.teacher", language));
+        }
+
+        return new AppResponse<>(getLanguage.getMessage("check.status.success", language));
     }
 
     //    ADDITIONAL METHODS

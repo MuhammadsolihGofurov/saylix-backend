@@ -8,13 +8,12 @@ import api.saylix.uz.entity.UsersEntity;
 import api.saylix.uz.enums.AppLanguage;
 import api.saylix.uz.exps.AppBadException;
 import api.saylix.uz.repository.TeacherRepository;
-import api.saylix.uz.repository.UsersRepository;
 import api.saylix.uz.utils.SpringSecurityUtil;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -36,7 +35,7 @@ public class TeacherService {
     public AppResponse<String> updateDetails(TeacherUpdateDetails dto, AppLanguage language) {
         String userId = SpringSecurityUtil.getCurrentUserId();
 
-        teacherRepository.updateNameAndSurnameAndBioAndExperienceYearsByUserId(userId, dto.getName(), dto.getSurname(), dto.getBio(), dto.getExperienceYears());
+        teacherRepository.updateNameAndSurnameAndBioAndExperienceYearsByUserId(userId, dto.getName(), dto.getSurname(), dto.getBio(), dto.getExperienceYears(), LocalDateTime.now());
 
 
         return new AppResponse<>(getLanguage.getMessage("user.update.details.success", language));
@@ -46,7 +45,7 @@ public class TeacherService {
         String userId = SpringSecurityUtil.getCurrentUserId();
         Optional<TeacherEntity> optional = teacherRepository.findByUserId(userId);
 
-        if(optional.isEmpty()) {
+        if (optional.isEmpty()) {
             throw new AppBadException(getLanguage.getMessage("user.not.found", language));
         }
         TeacherEntity teacher = optional.get();
@@ -55,7 +54,7 @@ public class TeacherService {
             googleDriveService.deleteMedia(dto.getPhotoKey());
         }
 
-        teacherRepository.updatePhotoKeyAndPhotoUrlById(dto.getPhotoUrl(), dto.getPhotoKey(), teacher.getId());
+        teacherRepository.updatePhotoKeyAndPhotoAndUpdateUpdatedAtUrlById(dto.getPhotoUrl(), dto.getPhotoKey(), LocalDateTime.now(), teacher.getId());
 
 
         return new AppResponse<>(getLanguage.getMessage("user.update.details.success", language));

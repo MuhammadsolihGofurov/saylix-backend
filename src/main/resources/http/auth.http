@@ -60,6 +60,15 @@ Accept-Language: en
   "password": "secret"
 }
 
+### CHECK STATUS FOR TEACHER
+POST http://localhost:9999/api/v1/user/check/status
+Content-Type: application/json
+Accept-Language: en
+
+{
+  "username": "gofurovmuhammadsolih004@gmail.com"
+}
+
 ### USER GET ME as TEACHER
 GET http://localhost:9999/api/v1/user/me
 Content-Type: application/json

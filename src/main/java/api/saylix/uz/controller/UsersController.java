@@ -59,5 +59,10 @@ public class UsersController {
         return ResponseEntity.ok().body(usersService.updateUsernameConfirm(dto, language));
     }
 
+    @PostMapping("/check/status")
+    public ResponseEntity<AppResponse> checkUserStatusForTeacher(@Valid @RequestBody CheckStatusByUsernameDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
+        return ResponseEntity.ok().body(usersService.checkUserStatusForTeacher(dto, language));
+    }
+
 
 }
