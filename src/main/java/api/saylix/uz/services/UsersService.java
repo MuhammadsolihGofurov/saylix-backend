@@ -146,7 +146,7 @@ public class UsersService {
         }
 
 
-        return new AppResponse<>(getLanguage.getMessage("registraion.confirm.success", language));
+        return new AppResponse<>(getLanguage.getMessage("registration.confirm.success", language));
     }
 
     public AppResponse<String> resetPassword(ResetPasswordDTO dto, AppLanguage language) {

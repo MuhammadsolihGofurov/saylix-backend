@@ -1,0 +1,44 @@
+### CREATE SUBJECT
+POST http://localhost:9999/api/v1/subject/create
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+{
+  "title": "AI",
+  "description": "AI is most popular future plan",
+  "photoUrl": "https://drive.google.com/uc?id=1wYumWtQBkDPILxyz4-rgioF3g9Md9Srz",
+  "photoKey": "1wYumWtQBkDPILxyz4-rgioF3g9Md9Srz"
+}
+
+### UPDATE SUBJECT
+PUT http://localhost:9999/api/v1/subject/update/da17d01a-6e3a-442f-a6cc-5ae20e178a97
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+{
+  "title": "Math 2",
+  "description": "Math is math 2",
+  "photoUrl": "https://drive.google.com/uc?id=1wYumWtQBkDPILxyz4-rgioF3g9Md9Srz",
+  "photoKey": "1wYumWtQBkDPILxyz4-rgioF3g9Md9Srz"
+}
+
+### DELETE SUBJECT
+DELETE http://localhost:9999/api/v1/subject/delete/a71b8e41-53fc-4ccf-9306-0258017b631c
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+### GET ALL SUBJECTS
+GET http://localhost:9999/api/v1/subject?page=0&size=20
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+### GET ONE SUBJECT
+GET http://localhost:9999/api/v1/subject/a71b8e41-53fc-4ccf-9306-0258017b631c
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+

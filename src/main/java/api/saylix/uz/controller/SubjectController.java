@@ -1,12 +1,19 @@
 package api.saylix.uz.controller;
 
+import api.saylix.uz.dto.subject.SubjectRequestDTO;
 import api.saylix.uz.dto.users.teacher.TeacherUpdatePhotoDTO;
 import api.saylix.uz.dto.utils.AppResponse;
+import api.saylix.uz.entity.SubjectEntity;
 import api.saylix.uz.enums.AppLanguage;
 import api.saylix.uz.services.SubjectService;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -19,9 +26,36 @@ public class SubjectController {
     private SubjectService subjectService;
 
 
-    @PostMapping("/update/photo")
-    public ResponseEntity<AppResponse<String>> createSubject(@Valid @RequestBody TeacherUpdatePhotoDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) throws IOException {
+    @PreAuthorize("hasRole('TEACHER')")
+    @PostMapping("/create")
+    public ResponseEntity<AppResponse> createSubject(@Valid @RequestBody SubjectRequestDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
         return ResponseEntity.ok().body(subjectService.createSubject(dto, language));
+    }
+
+    @PreAuthorize("hasRole('TEACHER')")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<AppResponse> updateSubject(@Valid @RequestBody SubjectRequestDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language, @PathVariable String id) {
+        return ResponseEntity.ok().body(subjectService.updateSubject(id, dto, language));
+    }
+
+    @PreAuthorize("hasRole('TEACHER')")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<AppResponse> deleteSubject(@RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language, @PathVariable String id) {
+        return ResponseEntity.ok().body(subjectService.deleteSubject(id, language));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page> getAllSubjects(
+            @PageableDefault(size = 10) Pageable pageable,
+            @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
+        return ResponseEntity.ok(subjectService.getAllSubjects(pageable, language));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AppResponse<SubjectEntity>> getSubjectById(
+            @PathVariable String id,
+            @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
+        return ResponseEntity.ok(subjectService.getSubjectById(id, language));
     }
 
 }

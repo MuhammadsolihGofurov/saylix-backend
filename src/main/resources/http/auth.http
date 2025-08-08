@@ -4,10 +4,10 @@ Content-Type: application/json
 Accept-Language: uz
 
 {
-  "username": "222211m@jdu.uz",
-  "name": "Student Muhammadsolih",
+  "username": "muhammadsolihdesigner@gmail.com",
+  "name": "Teacher A",
   "password": "secret",
-  "role": "STUDENT"
+  "role": "TEACHER"
 }
 
 ### REGISTRATION CONFIRM
@@ -16,8 +16,8 @@ Content-Type: application/json
 Accept-Language: uz
 
 {
-  "username": "222211m@jdu.uz",
-  "code": "16062"
+  "username": "muhammadsolihdesigner@gmail.com",
+  "code": "31865"
 }
 
 ### RESET PASSWORD

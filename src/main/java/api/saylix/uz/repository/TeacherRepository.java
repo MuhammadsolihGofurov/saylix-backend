@@ -1,5 +1,6 @@
 package api.saylix.uz.repository;
 
+import api.saylix.uz.entity.SubjectEntity;
 import api.saylix.uz.entity.TeacherEntity;
 import api.saylix.uz.entity.UsersEntity;
 import jakarta.transaction.Transactional;
@@ -39,4 +40,5 @@ public interface TeacherRepository extends CrudRepository<TeacherEntity, String>
             "t.updatedAt = :updatedAt " +
             "WHERE t.id = :id")
     void updatePhotoKeyAndPhotoAndUpdateUpdatedAtUrlById(String photoUrl, String photoKey, LocalDateTime updatedAt, String id);
+
 }
