@@ -1,0 +1,147 @@
+Spring Boot REST API ni Render.com ga Deploy qilish — Qo'llanma
+
+---
+
+1. Tayyorlov bosqichi: loyiha tayyorlash
+
+1.1 Loyiha yaratish
+
+- Spring Initializr (https://start.spring.io/) dan yangi Spring Boot loyiha yarating:
+  - Java 17+ (yoki 23)
+  - Dependencies: Spring Web, Spring Data JPA, PostgreSQL Driver, Spring Security (agar kerak bo‘lsa), Spring Boot DevTools (faqat local uchun)
+- Loyiha kodini IntelliJ IDEA yoki boshqa IDEda oching.
+
+1.2 Loyiha sozlamalari
+
+- application.properties yoki application.yml ichida
+  - Postgres DB ulanish parametrlarini o‘rnating (spring.datasource.url, username, password)
+  - Server portini ${PORT:8080} qilib o‘rnating (Render.com uchun portni avtomatik olish uchun):
+
+server.port=${PORT:8080}
+spring.datasource.url=jdbc:postgresql://<YOUR_DB_HOST>:5432/<YOUR_DB_NAME>
+spring.datasource.username=<YOUR_DB_USERNAME>
+spring.datasource.password=<YOUR_DB_PASSWORD>
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+- .gitignore faylini yarating va target/, .idea/, *.iml kabi keraksiz fayllarni qo‘shing.
+
+---
+
+2. Versiya boshqaruv va GitHub repozitoriyasini yaratish
+
+2.1 Git repozitoriya yaratish
+
+- Loyihaning ildizida terminalni oching:
+
+git init
+git add .
+git commit -m "Initial commit"
+
+2.2 GitHub repozitoriyasiga push qilish
+
+- GitHub da yangi repozitoriya yarating (masalan: saylix-backend)
+- Keyin lokal repozitoriyadan GitHub ga push qiling:
+
+git remote add origin https://github.com/username/saylix-backend.git
+git branch -M main
+git push -u origin main
+
+---
+
+3. Render.com da yangi Web Service yaratish
+
+3.1 Render hisob ochish va login
+
+- https://render.com ga kiring
+- Hisob yarating yoki login qiling.
+
+3.2 Yangi Web Service yaratish
+
+- Dashboarddan New > Web Service tanlang.
+- GitHub repozitoriyangizni ulash (OAuth orqali).
+- Loyihani tanlang (masalan: saylix-backend).
+- Branch ni tanlang (odatda main).
+- Environment: Java (agar mavjud bo'lsa).
+- Build command:
+
+./mvnw clean package
+
+yoki agar Gradle bo‘lsa:
+
+./gradlew build
+
+- Start command:
+
+java -jar target/saylix-backend-0.0.1-SNAPSHOT.jar
+
+(yoki JAR faylingiz nomiga mos ravishda)
+
+- Port: 8080 yoki sizning application.propertiesdagi server.port=${PORT:8080} dan foydalaning.
+
+Muhim: Render.com sizga portni $PORT muhit o'zgaruvchisi orqali beradi, shuning uchun Spring Boot loyihangiz portni server.port=${PORT:8080} deb olishi kerak.
+
+---
+
+4. Render.com da muhit o'zgaruvchilarini (Environment Variables) sozlash
+
+- Render web service sozlamalariga kiring.
+- Environment bo‘limida quyidagilarni qo‘shing:
+  - DATABASE_URL=jdbc:postgresql://<HOST>:5432/<DB_NAME>
+  - DATABASE_USERNAME=<username>
+  - DATABASE_PASSWORD=<password>
+- Agar boshqa maxfiy ma'lumotlar bo'lsa, ularni ham shu yerga qo'shing.
+
+- application.properties da bu parametrlarni ${DATABASE_URL}, ${DATABASE_USERNAME}, ${DATABASE_PASSWORD} deb oling.
+
+---
+
+5. Postgres DB ulanishi
+
+- Agar Render.com orqali Postgres DB ishlatayotgan bo'lsangiz:
+  - Render dashboardda Databases bo‘limidan yangi Postgres DB yarating.
+  - DB ma'lumotlarini (host, port, user, password, dbname) oling.
+  - Shu ma'lumotlarni Web Service environment variables sifatida o‘rnating.
+
+---
+
+6. Deployment va test
+
+- Render sizning repozitoriyangizdagi kodni avtomatik build qilib, deploy qiladi.
+- Loglar oynasida deploy jarayonini kuzating.
+- Deploy muvaffaqiyatli tugagach, Web Service URL manzilingiz paydo bo‘ladi.
+- Browserda https://your-app-url/swagger-ui/index.html yoki https://your-app-url/api/v1/ endpointlarini tekshiring.
+
+---
+
+7. Muammolarni tekshirish
+
+- Agar API ishlamayapti yoki 500 error bo'lsa, Render loglarini ko‘rib chiqing.
+- Database ulanish muammolari bo‘lsa, application.properties va env variables ni tekshiring.
+- Port sozlamalari to‘g‘ri ekaniga ishonch hosil qiling (server.port=${PORT:8080}).
+- Agar email yuborish ishlamasa, SMTP konfiguratsiyasini qayta tekshiring.
+
+---
+
+8. Qo‘shimcha maslahatlar
+
+- Lokalda barcha funksiyalar to‘liq ishlayotgani va barcha muhit o‘zgaruvchilar sozlanganini tekshiring.
+- GitHub’ga kodni har doim push qiling, Render yangi commitni avtomatik deploy qiladi.
+- Har doim loglarni ko‘rib boring, ayniqsa deploy yoki runtime xatoliklarda.
+
+---
+
+9. Misol: minimal application.properties Render uchun
+
+server.port=${PORT:8080}
+
+spring.datasource.url=${DATABASE_URL}
+spring.datasource.username=${DATABASE_USERNAME}
+spring.datasource.password=${DATABASE_PASSWORD}
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+---
+
+Agar biror bosqichda qiyinchilik bo‘lsa yoki batafsil yordam kerak bo‘lsa, so‘rashingiz mumkin!

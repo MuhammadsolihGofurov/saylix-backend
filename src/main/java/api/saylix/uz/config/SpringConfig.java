@@ -26,6 +26,7 @@ public class SpringConfig {
     public static final String[] AUTH_WHITELIST = {
             "/api/v1/user/auth/**",
             "/swagger-ui/**",
+            "/v3/api-docs",
             "/api/v1/user/check/status",
             "/error"
     };

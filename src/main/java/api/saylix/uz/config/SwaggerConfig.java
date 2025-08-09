@@ -45,7 +45,7 @@ public class SwaggerConfig {
 
         Server server3 = new Server()
                 .description("PROD")
-                .url("http://api.domain.uz");
+                .url("https://my-spring-app-latest-hlmo.onrender.com");
 
         // security type (bizning holatda JWT)
         SecurityRequirement securityRequirement = new SecurityRequirement();
