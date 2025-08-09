@@ -1,5 +1,6 @@
 package api.saylix.uz.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +41,8 @@ public class StudentEntity {
     @Column(name = "visible")
     private Boolean visible = true;
 
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
+    @JsonBackReference
     private Set<SubjectEntity> subjects = new HashSet<>();
 
     @Column(name = "updated_at")

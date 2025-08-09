@@ -1,9 +1,12 @@
 package api.saylix.uz.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,9 +30,12 @@ public class SectionEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
+    @JsonBackReference
     private SubjectEntity subject;
 
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Where(clause = "visible = true")
+    @JsonManagedReference
     private List<LessonEntity> lessons = new ArrayList<>();
 
     @Column(name = "visible")

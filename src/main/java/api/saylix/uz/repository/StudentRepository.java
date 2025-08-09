@@ -36,4 +36,6 @@ public interface StudentRepository extends CrudRepository<StudentEntity, String>
             "WHERE t.id = :id")
     void updatePhotoKeyAndPhotoUrlById(String photoUrl, String photoKey, String id, LocalDateTime updatedAt);
 
+    @Query("SELECT s FROM StudentEntity s WHERE s.user.id = :userId and s.visible = true")
+    Optional<StudentEntity> findByUserIdAndVisibleTrue(String userId);
 }

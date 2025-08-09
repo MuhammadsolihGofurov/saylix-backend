@@ -1,0 +1,49 @@
+### CREATE LESSON
+POST http://localhost:9999/api/v1/lesson/create
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+{
+  "title": "Math 1",
+  "description": "It's second class ",
+  "additionalDetails": "TEXT CONTENT ADD",
+  "content": "TEXT CONTENT",
+  "score": 1,
+  "type": "TEXT",
+  "sectionId": "62917c05-1ee5-40eb-a565-2c85ecbaa6f3"
+}
+
+### UPDATE LESSON
+POST http://localhost:9999/api/v1/lesson/update/
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+{
+  "title": "Second Section updated",
+  "description": "It's second class section",
+  "additionalDetails": "TEXT CONTENT ADD",
+  "content": "TEXT CONTENT",
+  "score": 1,
+  "type": "TEXT",
+  "sectionId": "62917c05-1ee5-40eb-a565-2c85ecbaa6f3"
+}
+
+### DELETE LESSON
+DELETE http://localhost:9999/api/v1/lesson/delete/0de2523a-d0d1-49f4-a13e-b02f80573467
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+### GET ALL LESSON
+GET http://localhost:9999/api/v1/lesson
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+### GET ONE LESSON
+GET http://localhost:9999/api/v1/lesson/62917c05-1ee5-40eb-a565-2c85ecbaa6f3
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk

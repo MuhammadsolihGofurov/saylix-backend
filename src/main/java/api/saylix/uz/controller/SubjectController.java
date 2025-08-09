@@ -1,5 +1,6 @@
 package api.saylix.uz.controller;
 
+import api.saylix.uz.dto.subject.SubjectPublicResponseDTO;
 import api.saylix.uz.dto.subject.SubjectRequestDTO;
 import api.saylix.uz.dto.users.teacher.TeacherUpdatePhotoDTO;
 import api.saylix.uz.dto.utils.AppResponse;
@@ -52,10 +53,19 @@ public class SubjectController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AppResponse<SubjectEntity>> getSubjectById(
+    public ResponseEntity<AppResponse<SubjectPublicResponseDTO>> getSubjectById(
             @PathVariable String id,
             @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
         return ResponseEntity.ok(subjectService.getSubjectById(id, language));
+    }
+
+    @PreAuthorize("hasRole('STUDENT')")
+    @PostMapping("/{subjectId}/enroll")
+    public ResponseEntity<AppResponse<?>> enrollToSubject(
+            @PathVariable String subjectId,
+            @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language
+    ) {
+        return ResponseEntity.ok(subjectService.enrollToSubject(subjectId, language));
     }
 
 }

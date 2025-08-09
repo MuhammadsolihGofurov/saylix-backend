@@ -1,0 +1,41 @@
+### CREATE SECTION
+POST http://localhost:9999/api/v1/section/create
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+{
+  "title": "Second Section",
+  "description": "It's second class section",
+  "subjectId": "da17d01a-6e3a-442f-a6cc-5ae20e178a97"
+}
+
+### UPDATE SECTION
+PUT http://localhost:9999/api/v1/section/update/62917c05-1ee5-40eb-a565-2c85ecbaa6f3
+Content-Type: application/json
+Accept-Language: en
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+{
+  "title": "First Section updated",
+  "description": "It's beginner class",
+  "subjectId": "da17d01a-6e3a-442f-a6cc-5ae20e178a97"
+}
+
+### DELETE SECTION
+DELETE http://localhost:9999/api/v1/section/delete/0de2523a-d0d1-49f4-a13e-b02f80573467
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+### GET ALL SECTION
+GET http://localhost:9999/api/v1/section
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk
+
+### GET ONE SECTION
+GET http://localhost:9999/api/v1/section/62917c05-1ee5-40eb-a565-2c85ecbaa6f3
+Content-Type: application/json
+Accept-Language: uz
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdWhhbW1hZHNvbGloZGVzaWduZXJAZ21haWwuY29tIiwiaWQiOiI3NWY3MjU5Yi0wNDE4LTQyMjctOTZhOS1kYWE0NjkzZjFhNzUiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTc1NDY2NjQ2MCwiZXhwIjoxNzU0NzUyODYwfQ.QrQRtajZNCiFxLnsfjn8ce5aDWE3qCO3i6B8PYMPIOk

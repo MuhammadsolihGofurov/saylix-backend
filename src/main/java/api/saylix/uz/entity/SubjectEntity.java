@@ -1,9 +1,11 @@
 package api.saylix.uz.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -35,7 +37,9 @@ public class SubjectEntity {
     @Column(name = "photo_key")
     private String photoKey;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Where(clause = "visible = true")
+    @JsonManagedReference
     private List<SectionEntity> sections = new ArrayList<>();
 
     @ManyToMany
@@ -44,6 +48,8 @@ public class SubjectEntity {
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
+    @Where(clause = "visible = true")
+    @JsonManagedReference
     private Set<StudentEntity> students = new HashSet<>();
 
     @Column(name = "visible")

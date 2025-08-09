@@ -1,37 +1,33 @@
 package api.saylix.uz.config;
+
+import api.saylix.uz.exps.CustomSecurityExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.UUID;
-
 @Configuration
+@EnableWebSecurity
 public class SpringConfig {
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
-    @Autowired
-    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-
 
     public static final String[] AUTH_WHITELIST = {
             "/api/v1/user/auth/**",
-            "/api/v1/swagger-ui/**",
-            "/api/v1/user/check/status"
+            "/swagger-ui/**",
+            "/api/v1/user/check/status",
+            "/error"
     };
 
 
@@ -44,7 +40,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomSecurityExceptionHandler securityHandler) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AUTH_WHITELIST).permitAll()
@@ -52,10 +48,12 @@ public class SpringConfig {
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults());
-//                .exceptionHandling(ex -> ex
-//                        .authenticationEntryPoint(customAuthenticationEntryPoint)
-//                );
+                .cors(Customizer.withDefaults())
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(securityHandler)
+                        .accessDeniedHandler(securityHandler)
+                );
+
 
         return http.build();
     }

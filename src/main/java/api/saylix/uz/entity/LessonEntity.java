@@ -1,9 +1,12 @@
 package api.saylix.uz.entity;
 
 import api.saylix.uz.enums.LessonType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -24,8 +27,8 @@ public class LessonEntity {
     @Enumerated(EnumType.STRING)
     private LessonType typeOfLesson;
 
-    @Column(name = "is_finished")
-    private boolean isFinished;
+    @Column(name = "finished")
+    private Boolean finished = false;
 
     @Column(name = "score")
     private Integer score;
@@ -33,8 +36,22 @@ public class LessonEntity {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "additional_details", columnDefinition = "text")
+    private String additionalDetails;
+
+    @Column(name = "visible")
+    private Boolean visible = true;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
+    @JsonBackReference
     private SectionEntity section;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
 }
